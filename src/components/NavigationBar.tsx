@@ -1,5 +1,6 @@
-import { Box, Flex, HStack, Heading, Spacer } from '@chakra-ui/react'
-import React from 'react'
+import { HamburgerIcon } from '@chakra-ui/icons';
+import { Box, Center, Divider, Flex, Grid, GridItem, HStack, Heading, Hide, IconButton, Show, Spacer, VStack, useBreakpointValue } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 const btnStyle = (isActive: boolean, isPending: boolean) => {
@@ -10,24 +11,37 @@ const btnStyle = (isActive: boolean, isPending: boolean) => {
 }
 
 function NavigationBar() {
+    const [navShowed, setNavShowed] = useState(false);
+
     return (
         <>
-            <Flex p="15px">
-                <NavLink to="/">
-
+            <Grid templateAreas={{
+                base: `"logo burger"
+                    "link link"` ,
+                md: `"logo link"`
+            }} padding='15px' mb='30px'>
+                <GridItem area={'logo'}>
                     <Heading>Špajz Bojz</Heading>
-                </NavLink>
-                <Spacer />
+                </GridItem>
+                <Hide above='md'>
+                    <GridItem area={'burger'}>
+                        <Flex justifyContent='flex-end'>
+                            <IconButton onClick={() => setNavShowed(!navShowed)} aria-label='hamburger-menu' icon={<HamburgerIcon />} />
+                        </Flex>
+                    </GridItem>
+                </Hide>
+                <GridItem area={'link'}>
+                    <Flex height='100%' gap="15px" justifyContent='flex-end' alignItems='center' direction={{ base: "column", md: "row" }} display={{ base: navShowed ? "flex" : "none", md: "flex" }}>
+                        <NavLink to="o-nas"
+                            style={({ isActive, isPending }) => btnStyle(isActive, isPending)}>O nás</NavLink>
+                        <NavLink to="koncerty"
+                            style={({ isActive, isPending }) => btnStyle(isActive, isPending)}>Koncerty</NavLink>
+                        <NavLink to="eshop"
+                            style={({ isActive, isPending }) => btnStyle(isActive, isPending)}>Eshop</NavLink>
+                    </Flex>
+                </GridItem>
 
-                <HStack spacing="20px">
-                    <NavLink to="o-nas"
-                        style={({ isActive, isPending }) => btnStyle(isActive, isPending)}>O nás</NavLink>
-                    <NavLink to="koncerty"
-                        style={({ isActive, isPending }) => btnStyle(isActive, isPending)}>Koncerty</NavLink>
-                    <NavLink to="eshop"
-                        style={({ isActive, isPending }) => btnStyle(isActive, isPending)}>Eshop</NavLink>
-                </HStack>
-            </Flex >
+            </Grid>
         </>
     )
 }
