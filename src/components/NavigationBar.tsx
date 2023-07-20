@@ -2,6 +2,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import { Box, Center, Divider, Flex, Grid, GridItem, HStack, Heading, Hide, IconButton, Show, Spacer, VStack, useBreakpointValue } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import useShopStore from '../features/eshop/state/shopState';
 
 const btnStyle = (isActive: boolean, isPending: boolean) => {
     return {
@@ -12,6 +13,7 @@ const btnStyle = (isActive: boolean, isPending: boolean) => {
 
 function NavigationBar() {
     const [navShowed, setNavShowed] = useState(false);
+    const cartItems = useShopStore((state) => state.cartItems);
 
     return (
         <>
@@ -42,6 +44,7 @@ function NavigationBar() {
                 </GridItem>
 
             </Grid>
+            <Heading>{cartItems.length}</Heading>
         </>
     )
 }
