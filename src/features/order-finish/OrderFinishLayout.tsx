@@ -14,7 +14,7 @@ function OrderFinishLayout() {
     return (
         <>
 
-            <Stepper index={activeStep}>
+            <Stepper index={activeStep} mb='30px'>
                 {steps.map((step, index) => (
                     <Step key={index} onClick={() => {
                         setActiveStep(index);

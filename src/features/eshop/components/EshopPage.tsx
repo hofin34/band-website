@@ -1,11 +1,7 @@
-import { Card, CardBody, Heading, Stack, Text, Image, Divider, CardFooter, Button, HStack, Flex, SimpleGrid, IconButton } from '@chakra-ui/react'
-import React from 'react'
-import useProducts from '../api/useProducts'
-import { urlFor } from '../../../services/sanity-client';
-import { FaBeer } from 'react-icons/fa';
-import { EmailIcon } from '@chakra-ui/icons';
-import AddProductButton from './AddProductButton';
+import { Card, CardBody, Flex, Heading, Image, SimpleGrid, Stack, Text } from '@chakra-ui/react';
+import useProducts from '../api/useProducts';
 import useShopStore from '../state/shopState';
+import AddProductButton from './AddProductButton';
 
 const testImg = 'https://images.pexels.com/photos/428311/pexels-photo-428311.jpeg?cs=srgb&dl=pexels-spencer-selover-428311.jpg&fm=jpg'
 

@@ -2,9 +2,11 @@ import { Badge, Button, HStack, Heading, IconButton, Popover, PopoverBody, Popov
 import React from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
+import Product from '../entities/product'
+import ProductInCart from '../entities/productInCart'
 
 interface Props {
-    cartItems: Product[]
+    cartItems: ProductInCart[]
 }
 
 function CartIcon({ cartItems }: Props) {
@@ -20,10 +22,19 @@ function CartIcon({ cartItems }: Props) {
                 <PopoverContent>
                     <PopoverHeader><Heading size='sm'>Nákupní košík</Heading></PopoverHeader>
                     <PopoverBody>
-                        <Text>Položek: {cartItems.length}</Text>
-                        <Text>
-                            Celkem: {cartItems.reduce((accumulator, currVal) => (accumulator + currVal.price), 0)} Kč
-                        </Text>
+                        {cartItems.map((item) => (
+                            <HStack>
+                                <Text color='gray'>{item.quantity} x</Text>
+                                <Text>{item.product.name}</Text>
+                            </HStack>
+                        ))}
+                        <HStack mt='10px'>
+                            <Text>Celkem: </Text>
+                            <Text fontWeight='lg'>
+                                {cartItems.reduce((accumulator, currVal) => (accumulator + currVal.quantity * currVal.product.price), 0)} Kč
+                            </Text>
+
+                        </HStack>
                     </PopoverBody>
                     <PopoverFooter>
                         <NavLink to="rekapitulace">

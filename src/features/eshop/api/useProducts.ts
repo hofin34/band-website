@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import APIClient from "../../../services/api-client";
+import Product from "../entities/product";
 
 
 const client = new APIClient<Product>("");

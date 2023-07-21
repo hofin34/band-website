@@ -18,7 +18,7 @@ function AddProductButton({ onClickAction }: Props) {
         return <Text fontSize='lg' color='green'>Přidáno.</Text>
     }
     else {
-        return <Button leftIcon={<BsCartFill />} variant='solid' colorScheme='blue' onClick={buttonClickAction} >Do kosiku</Button>
+        return <Button leftIcon={<BsCartFill />} variant='solid' colorScheme='blue' onClick={buttonClickAction} >Do košíku</Button>
     }
 }
 

@@ -5,3 +5,5 @@ interface Product {
     imgUrl: string;
     price: number;
 }
+
+export default Product
