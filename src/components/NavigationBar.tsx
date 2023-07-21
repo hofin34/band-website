@@ -1,8 +1,11 @@
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { Box, Center, Divider, Flex, Grid, GridItem, HStack, Heading, Hide, IconButton, Show, Spacer, VStack, useBreakpointValue } from '@chakra-ui/react'
+import { Badge, Box, Button, Center, Divider, Flex, Grid, GridItem, HStack, Heading, Hide, IconButton, Popover, PopoverBody, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Show, Spacer, Text, VStack, useBreakpointValue } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import useShopStore from '../features/eshop/state/shopState';
+import { BsCircleFill } from 'react-icons/bs';
+import { FaShoppingCart } from 'react-icons/fa';
+import CartIcon from '../features/eshop/components/CartIcon';
 
 const btnStyle = (isActive: boolean, isPending: boolean) => {
     return {
@@ -23,7 +26,13 @@ function NavigationBar() {
                 md: `"logo link"`
             }} padding='15px' mb='30px'>
                 <GridItem area={'logo'}>
-                    <Heading>Špajz Bojz</Heading>
+
+                    <Heading>
+                        <NavLink to="/">
+                            Špajz Bojz
+
+                        </NavLink>
+                    </Heading>
                 </GridItem>
                 <Hide above='md'>
                     <GridItem area={'burger'}>
@@ -40,11 +49,11 @@ function NavigationBar() {
                             style={({ isActive, isPending }) => btnStyle(isActive, isPending)}>Koncerty</NavLink>
                         <NavLink to="eshop"
                             style={({ isActive, isPending }) => btnStyle(isActive, isPending)}>Eshop</NavLink>
+                        <CartIcon cartItems={cartItems} />
                     </Flex>
                 </GridItem>
 
             </Grid>
-            <Heading>{cartItems.length}</Heading>
         </>
     )
 }
