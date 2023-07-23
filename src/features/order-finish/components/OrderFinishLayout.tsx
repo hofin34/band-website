@@ -6,7 +6,6 @@ const steps = [
     { title: 'Rekapitulace', description: 'Rekapitulace objednávky' },
     { title: 'Doprava', description: 'Doprava a osobní informace' },
     { title: 'Platba', description: 'Přesměrování na platební bránu' }
-
 ]
 
 function OrderFinishLayout() {

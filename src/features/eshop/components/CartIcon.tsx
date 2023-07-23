@@ -4,6 +4,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
 import Product from '../entities/product'
 import ProductInCart from '../entities/productInCart'
+import { getTotalPrice } from '../state/shopState'
 
 interface Props {
     cartItems: ProductInCart[]
@@ -31,7 +32,7 @@ function CartIcon({ cartItems }: Props) {
                         <HStack mt='10px'>
                             <Text>Celkem: </Text>
                             <Text fontWeight='lg'>
-                                {cartItems.reduce((accumulator, currVal) => (accumulator + currVal.quantity * currVal.product.price), 0)} Kč
+                                {getTotalPrice(cartItems)} Kč
                             </Text>
 
                         </HStack>

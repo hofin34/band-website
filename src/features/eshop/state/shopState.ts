@@ -6,7 +6,7 @@ import ProductInCart from "../entities/productInCart"
 interface ShopState {
     cartItems: ProductInCart[]
     addItem: (product: Product) => void
-    removeOneItem: (productId: string) => void
+    setProductQuantity: (productId: string, quantity: number) => void
     removeAllItems: (productId: string) => void
 }
 
@@ -14,7 +14,7 @@ const addItemToCart = (cartItems: ProductInCart[], addedItem: Product) => {
     let newCartItems = [...cartItems]
     let itemIn = false;
     for (let i = 0; i < newCartItems.length; i++) {
-        if (newCartItems[i].product._id == addedItem._id) {
+        if (newCartItems[i].product._id === addedItem._id) {
             newCartItems[i].quantity += 1;
             itemIn = true;
         }
@@ -30,11 +30,16 @@ const useShopStore = create<ShopState>()(
 
         (set) => ({
             cartItems: [],
-            removeOneItem: (productId) => set((state) => ({
-                cartItems: [...state.cartItems] // TODO finish, not working...
+            setProductQuantity: (productId, quantity) => set((state) => ({
+                cartItems: [...state.cartItems].map((item) => {
+                    if (item.product._id === productId) {
+                        item.quantity = quantity;
+                    }
+                    return item;
+                }) // TODO finish, not working...
             })),
             removeAllItems: (productId) => set((state) => ({
-                cartItems: [] // state.cartItems.filter((item) => (item._id != productId))
+                cartItems: state.cartItems.filter((item) => (item.product._id !== productId))
             })),
             addItem: (product) => set((state) => ({
                 cartItems: addItemToCart(state.cartItems, product) //((state.cartItems.some(item => {item.product._id ==}) ? [] : []))
@@ -46,4 +51,9 @@ const useShopStore = create<ShopState>()(
 
     ))
 )
+
+export const getTotalPrice = (products: ProductInCart[]) => {
+    return products.reduce((prev, curr) => (prev + (curr.product.price * curr.quantity)), 0)
+}
+
 export default useShopStore;
