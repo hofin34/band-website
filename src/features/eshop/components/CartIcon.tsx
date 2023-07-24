@@ -24,7 +24,7 @@ function CartIcon({ cartItems }: Props) {
                     <PopoverHeader><Heading size='sm'>Nákupní košík</Heading></PopoverHeader>
                     <PopoverBody>
                         {cartItems.map((item) => (
-                            <HStack>
+                            <HStack key={item.product._id}>
                                 <Text color='gray'>{item.quantity} x</Text>
                                 <Text>{item.product.name}</Text>
                             </HStack>

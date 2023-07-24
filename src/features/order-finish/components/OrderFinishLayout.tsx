@@ -1,22 +1,42 @@
 import { Box, Button, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, useSteps } from '@chakra-ui/react'
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React, { useEffect, useRef } from 'react'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import useShopStore from '../../eshop/state/shopState'
+import useOrderStore from '../state/orderState'
+import { ImCross } from 'react-icons/im'
 
-const steps = [
-    { title: 'Rekapitulace', description: 'Rekapitulace objednávky' },
-    { title: 'Doprava', description: 'Doprava a osobní informace' },
-    { title: 'Platba', description: 'Přesměrování na platební bránu' }
-]
 
 function OrderFinishLayout() {
-    const { activeStep, setActiveStep } = useSteps({ index: 1, count: steps.length })
+    const activeStep = useOrderStore((state) => state.activeStep)
+    const setActiveStep = useOrderStore((state) => state.setActiveStep)
+    const steps = useOrderStore((state) => state.steps)
+    const cartItems = useShopStore((state) => state.cartItems);
+    const markStepDone = useOrderStore((state) => state.markStepDone)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        navigate(steps[activeStep].url);
+    }, [activeStep])
+
+
+    const nextButtonClick = () => {
+        if (activeStep + 1 < steps.length) {
+            setActiveStep(activeStep + 1);
+            markStepDone(activeStep);
+        } else {
+            navigate('/gratulace');
+        }
+    }
+
     return (
         <>
 
             <Stepper index={activeStep} mb='30px'>
                 {steps.map((step, index) => (
                     <Step key={index} onClick={() => {
-                        setActiveStep(index);
+                        if ((index === 0 || steps[index - 1].done === true) && cartItems.length !== 0) {
+                            setActiveStep(index);
+                        }
                     }}>
                         <StepIndicator>
                             <StepStatus complete={<StepIcon />}
@@ -35,7 +55,11 @@ function OrderFinishLayout() {
 
             <Outlet />
 
-            <Button m='15px' colorScheme='blue' onClick={() => setActiveStep(activeStep + 1)}>Pokračovat dále</Button>
+            <Button isDisabled={cartItems.length > 0 ? false : true} m='15px' colorScheme='blue' onClick={nextButtonClick}>
+                {activeStep + 1 === steps.length ?
+                    "Dokončit objednávku" : "Pokračovat dále"
+                }
+            </Button>
         </>
     )
 }

@@ -27,7 +27,7 @@ function Recapitulation() {
                     <Tbody>
                         {
                             cartItems.map((item) => (
-                                <Tr>
+                                <Tr key={item.product._id}>
                                     <Td>{item.product.name}</Td>
                                     <Td>
                                         <NumberInput defaultValue={item.quantity} min={1} maxW={20} onChange={(value) => setItemQuantity(item.product._id, parseInt(value))}>

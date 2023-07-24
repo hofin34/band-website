@@ -8,6 +8,7 @@ import OrderFinishLayout from "./features/order-finish/components/OrderFinishLay
 import Recapitulation from "./features/order-finish/components/Recapitulation";
 import ShippingInfo from "./features/order-finish/components/ShippingInfo";
 import Payment from "./features/order-finish/components/Payment";
+import FinishCongratulation from "./features/order-finish/components/FinishCongratulation";
 
 
 
@@ -17,11 +18,12 @@ const router = createBrowserRouter([{
         { path: "koncerty", element: <ConcertPage /> },
         { path: "o-nas", element: <AboutPage /> },
         { path: "eshop", element: <EshopPage /> },
+        { path: "gratulace", element: <FinishCongratulation /> },
         {
             path: "rekapitulace", element: <OrderFinishLayout />, children: [
                 { path: "", element: <Recapitulation /> },
                 { path: "doprava", element: <ShippingInfo /> },
-                { path: "platba", element: <Payment /> }
+                { path: "platba", element: <Payment /> },
 
             ]
         }
