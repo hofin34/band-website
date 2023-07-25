@@ -5,7 +5,7 @@ import ConcertList from './ConcertList'
 function ConcertPage() {
     return (
         <>
-            <Heading>Koncerty</Heading>
+            <Heading size='lg'>Koncerty</Heading>
             <ConcertList />
         </>
     )

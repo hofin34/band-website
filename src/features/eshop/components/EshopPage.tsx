@@ -20,7 +20,7 @@ function EshopPage() {
     //TODO: limit description length
     return (
         <>
-            <Heading>Produkty</Heading>
+            <Heading size='lg'>Produkty</Heading>
             <SimpleGrid spacing="10px" columns={{ base: 1, sm: 1, md: 3, lg: 6 }}>
 
                 {data?.result.map((product) =>

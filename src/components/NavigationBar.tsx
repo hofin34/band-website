@@ -24,7 +24,7 @@ function NavigationBar() {
                 base: `"logo burger"
                     "link link"` ,
                 md: `"logo link"`
-            }} padding='15px' mb='30px'>
+            }} padding='25px' mb='30px' backgroundColor='blackAlpha.50'>
                 <GridItem area={'logo'}>
 
                     <Heading>
