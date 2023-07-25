@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+import { FormSchemaType } from '../entities/schema'
 
 
 interface Step {
@@ -9,7 +10,10 @@ interface Step {
     done: boolean;
 }
 
+
 interface OrderState {
+    personInformation: FormSchemaType | undefined
+    setPersonInformation: (information: FormSchemaType) => void
     steps: Step[]
     activeStep: number
     setActiveStep: (stepIndex: number) => void
@@ -23,6 +27,8 @@ const useOrderStore = create<OrderState>()(
     devtools(persist(
 
         (set) => ({
+            personInformation: undefined,
+            setPersonInformation: (information) => set({ personInformation: information }),
             activeStep: 0,
             setActiveStep: (stepIndex) => set((state) => ({ activeStep: stepIndex < state.steps.length ? stepIndex : state.activeStep })),
             markStepDone: (stepIndex) => set((state) => ({

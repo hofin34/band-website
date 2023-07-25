@@ -1,33 +1,57 @@
-import { Heading } from '@chakra-ui/react'
+import { Button, Card, CardBody, FormControl, FormErrorMessage, FormLabel, Heading, Input } from '@chakra-ui/react'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { zodResolver } from "@hookform/resolvers/zod";
+import useOrderProcess from '../hooks/useOrderProcess';
+import { FormSchemaType, schema } from '../entities/schema'
 
-type Inputs = {
-    example: string
-    exampleRequired: string
-}
 
-const schema = z.object({
-    username: z.string()
-})
+const FORM_CONTROL_MARGIN = '10px'
 
 function ShippingInfo() {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors, isSubmitting, isValid } } = useForm<FormSchemaType>({ resolver: zodResolver(schema), mode: 'onBlur' })
+    const { nextButtonClick, buttonText } = useOrderProcess();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+    const onSubmit: SubmitHandler<FormSchemaType> = (data) => console.log(data);
+
     return (
         <>
-            <Heading>ShippingInfo</Heading>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input defaultValue='default' {...register("example")} />
-                <input {...register("exampleRequired", { required: true })} />
-                {errors.exampleRequired && <p>this is required</p>}
+            <Heading>Osobní informace</Heading>
+            <Card maxW='md' mx='30px'>
+                <CardBody >
 
-                <input type="submit" />
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <FormControl isRequired isInvalid={errors.email !== undefined}>
+                            <FormLabel htmlFor='email' >
+                                Email
+                            </FormLabel>
+                            <Input type='email' id='email' {...register("email")} />
+                            <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
+                        </FormControl>
+                        <FormControl isRequired isInvalid={errors.name !== undefined} mt={FORM_CONTROL_MARGIN}>
+                            <FormLabel htmlFor='name'>
+                                Jméno a příjmení
+                            </FormLabel>
+                            <Input id='name' {...register("name")} />
+                            <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
+                        </FormControl>
+                        <FormControl isRequired isInvalid={errors.address !== undefined} mt={FORM_CONTROL_MARGIN}>
+                            <FormLabel htmlFor='address'>
+                                Adresa
+                            </FormLabel>
+                            <Input id='address' {...register("address")} />
+                            <FormErrorMessage>{errors.address && errors.address.message}</FormErrorMessage>
+                        </FormControl>
 
-            </form>
+                        <Button type="submit" isDisabled={!isValid} m='15px' colorScheme='blue' onClick={nextButtonClick}>
+                            {buttonText}
+                        </Button>
+
+                    </form>
+
+                </CardBody>
+            </Card>
 
         </>
     )
