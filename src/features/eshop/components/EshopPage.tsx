@@ -1,9 +1,9 @@
-import { Card, CardBody, Flex, Heading, Image, SimpleGrid, Stack, Text } from '@chakra-ui/react';
+import { Card, CardBody, Flex, Heading, Image, SimpleGrid, Spinner, Stack, Text } from '@chakra-ui/react';
 import useProducts from '../api/useProducts';
 import useShopStore from '../state/shopState';
 import AddProductButton from './AddProductButton';
+import { urlFor } from '../../../services/sanity-client';
 
-const testImg = 'https://images.pexels.com/photos/428311/pexels-photo-428311.jpeg?cs=srgb&dl=pexels-spencer-selover-428311.jpg&fm=jpg'
 
 function getShortText(text: string, length: number) {
     if (text.length < length) {
@@ -11,6 +11,8 @@ function getShortText(text: string, length: number) {
     }
     return text.substring(0, length) + " ..."
 }
+
+
 
 function EshopPage() {
     const { data, isLoading, error } = useProducts();
@@ -21,12 +23,13 @@ function EshopPage() {
     return (
         <>
             <Heading size='lg'>Produkty</Heading>
-            <SimpleGrid spacing="10px" columns={{ base: 1, sm: 1, md: 3, lg: 6 }}>
-
+            {error && <Text color='red'>Problém se stahováním dat</Text>}
+            {isLoading && <Spinner />}
+            <SimpleGrid mt='15px' spacing="10px" columns={{ base: 1, sm: 1, md: 3, lg: 4 }}>
                 {data?.result.map((product) =>
                     <Card maxW='md' key={product._id}>
                         <CardBody>
-                            <Image src={testImg} alt='Product image' borderRadius='lg' />
+                            <Image src={urlFor(product.images[0].asset._ref).height(300).width(300).url()} alt='Product image' borderRadius='lg' />
                             <Stack mt='6' spacing='3'>
                                 <Heading size='md'>{product.name}</Heading>
                                 <Text>{getShortText(product.detail, 30)}</Text>

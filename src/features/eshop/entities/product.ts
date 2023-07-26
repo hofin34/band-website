@@ -2,8 +2,12 @@ interface Product {
     _id: string;
     name: string;
     detail: string;
-    imgUrl: string;
     price: number;
+    images: {
+        asset: {
+            _ref: string
+        }
+    }[];
 }
 
 export default Product

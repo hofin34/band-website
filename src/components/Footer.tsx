@@ -1,6 +1,5 @@
-import { Box, Flex, HStack, Heading, IconButton, Spacer, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
-import { BsFillTelephoneFill, BsFacebook, BsInstagram } from 'react-icons/bs'
+import { Box, Flex, HStack, IconButton, Spacer, Text } from '@chakra-ui/react'
+import { BsFacebook, BsFillTelephoneFill, BsInstagram } from 'react-icons/bs'
 import { GrMail } from 'react-icons/gr'
 
 

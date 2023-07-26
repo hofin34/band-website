@@ -1,13 +1,11 @@
-import { Box, Button, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, useBreakpointValue, } from '@chakra-ui/react'
-import React, { useEffect, useRef } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Box, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper } from '@chakra-ui/react'
+import { useEffect } from 'react'
+import { useMediaQuery } from 'react-responsive'
+import { Outlet, useNavigate } from 'react-router-dom'
 import useShopStore from '../../eshop/state/shopState'
 import useOrderStore from '../state/orderState'
-import { ImCross } from 'react-icons/im'
-import { useMediaQuery } from 'react-responsive'
 
 
-type Orientation = "horizontal" | "vertical";
 
 function OrderFinishLayout() {
     const activeStep = useOrderStore((state) => state.activeStep)

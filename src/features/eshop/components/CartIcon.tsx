@@ -1,8 +1,6 @@
 import { Badge, Button, HStack, Heading, IconButton, Popover, PopoverBody, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Text } from '@chakra-ui/react'
-import React from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
 import { NavLink } from 'react-router-dom'
-import Product from '../entities/product'
 import ProductInCart from '../entities/productInCart'
 import { getTotalPrice } from '../state/shopState'
 

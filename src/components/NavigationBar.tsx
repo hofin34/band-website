@@ -1,11 +1,9 @@
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { Badge, Box, Button, Center, Divider, Flex, Grid, GridItem, HStack, Heading, Hide, IconButton, Popover, PopoverBody, PopoverContent, PopoverFooter, PopoverHeader, PopoverTrigger, Portal, Show, Spacer, Text, VStack, useBreakpointValue } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import useShopStore from '../features/eshop/state/shopState';
-import { BsCircleFill } from 'react-icons/bs';
-import { FaShoppingCart } from 'react-icons/fa';
+import { Flex, Grid, GridItem, Heading, Hide, IconButton } from '@chakra-ui/react';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import CartIcon from '../features/eshop/components/CartIcon';
+import useShopStore from '../features/eshop/state/shopState';
 
 const btnStyle = (isActive: boolean, isPending: boolean) => {
     return {

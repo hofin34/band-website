@@ -1,6 +1,4 @@
-import { Heading, useStatStyles } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import ConfettiExplosion from 'react-confetti-explosion';
+import { Heading } from '@chakra-ui/react';
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 

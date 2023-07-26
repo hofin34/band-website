@@ -1,6 +1,6 @@
 import { Button, Text } from '@chakra-ui/react'
 import { BsCartFill } from 'react-icons/bs';
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 interface Props {
     onClickAction: () => void;

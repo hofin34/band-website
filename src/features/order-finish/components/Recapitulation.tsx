@@ -1,6 +1,5 @@
-import React from 'react'
-import useShopStore, { getTotalPrice } from '../../eshop/state/shopState';
 import { Button, Heading, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from '@chakra-ui/react';
+import useShopStore, { getTotalPrice } from '../../eshop/state/shopState';
 import useOrderProcess from '../hooks/useOrderProcess';
 
 
@@ -10,7 +9,7 @@ function Recapitulation() {
     const deleteAllItemsWithId = useShopStore((state) => state.removeAllItems);
     const setItemQuantity = useShopStore((state) => state.setProductQuantity);
 
-    const { buttonText, nextButtonClick } = useOrderProcess()
+    const { nextButtonClick } = useOrderProcess()
 
     return (
         <>
@@ -62,7 +61,7 @@ function Recapitulation() {
 
 
             <Button isDisabled={cartItems.length > 0 ? false : true} m='15px' colorScheme='blue' onClick={nextButtonClick}>
-                {buttonText}
+                Pokračovat dále
             </Button>
         </>
 

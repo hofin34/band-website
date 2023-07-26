@@ -1,8 +1,6 @@
-import axios from 'axios';
-import React, { useEffect } from 'react'
+import { Card, CardBody, Flex, Heading, IconButton, Spinner, Text } from '@chakra-ui/react';
+import { FiExternalLink } from 'react-icons/fi';
 import useConcerts from '../api/useConcerts';
-import { Card, CardBody, Center, Divider, Flex, Heading, IconButton, Stack, Text } from '@chakra-ui/react';
-import { FiExternalLink } from 'react-icons/fi'
 
 const getDateDay = (dateStr: string) => {
     const date = new Date(dateStr)
@@ -20,6 +18,8 @@ function ConcertList() {
     const { data, error, isLoading } = useConcerts();
     return (
         <>
+            {error && <Text color="red">Chyba při načítání koncertů</Text>}
+            {isLoading && <Spinner />}
             {data?.result.sort(function (a, b) {
                 return new Date(b.date).valueOf() - new Date(a.date).valueOf();
             }).map((concert) =>

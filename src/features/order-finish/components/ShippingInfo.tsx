@@ -1,5 +1,4 @@
 import { Button, Card, CardBody, FormControl, FormErrorMessage, FormLabel, Heading, Input } from '@chakra-ui/react'
-import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod";
 import useOrderProcess from '../hooks/useOrderProcess';
@@ -11,8 +10,8 @@ const FORM_CONTROL_MARGIN = '10px'
 
 function ShippingInfo() {
 
-    const { register, handleSubmit, formState: { errors, isSubmitting, isValid } } = useForm<FormSchemaType>({ resolver: zodResolver(schema), mode: 'onBlur' })
-    const { nextButtonClick, buttonText } = useOrderProcess();
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormSchemaType>({ resolver: zodResolver(schema), mode: 'onBlur' })
+    const { nextButtonClick } = useOrderProcess();
     const setPersonInformation = useOrderStore((state) => state.setPersonInformation)
     const personInformation = useOrderStore((state) => state.personInformation)
 
@@ -51,7 +50,7 @@ function ShippingInfo() {
                         </FormControl>
 
                         <Button type="submit" isDisabled={!isValid} m='15px' colorScheme='blue' >
-                            {buttonText}
+                            Uložit a pokračovat dále
                         </Button>
 
                     </form>
