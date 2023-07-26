@@ -23,7 +23,7 @@ function ConcertList() {
             {data?.result.sort(function (a, b) {
                 return new Date(b.date).valueOf() - new Date(a.date).valueOf();
             }).map((concert) =>
-                <Card direction='row' m='15px' p='15px' maxW='4xl'>
+                <Card key={concert._id} direction='row' m='15px' p='15px' maxW='4xl'>
                     <Flex direction='column' justifyContent='center' alignItems='center'>
                         <Heading color='red.700'>{getDateDay(concert.date)}.</Heading>
                         <Text color='red.700'>{getDateMonthName(concert.date)}</Text>
