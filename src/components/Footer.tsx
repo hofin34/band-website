@@ -22,8 +22,8 @@ function Footer() {
                 <Flex direction='column' >
                     <Text mb='10px' color='gray.500' size='sm'>Sledujte nás</Text>
                     <HStack ml='20px'>
-                        <IconButton aria-label='fb-link' onClick={() => window.open("https://www.facebook.com/spajzbojz", '_blank')} icon={<BsFacebook size='30px' />} />
-                        <IconButton aria-label='ig-link' onClick={() => window.open("https://instagram.com/spajzbojz", '_blank')} icon={<BsInstagram size='30px' />} />
+                        <IconButton _hover={{ color: '#4267B2' }} aria-label='fb-link' onClick={() => window.open("https://www.facebook.com/spajzbojz", '_blank')} icon={<BsFacebook size='30px' />} />
+                        <IconButton _hover={{ color: '#FD1D1D' }} aria-label='ig-link' onClick={() => window.open("https://instagram.com/spajzbojz", '_blank')} icon={<BsInstagram size='30px' />} />
                     </HStack>
                 </Flex>
             </Flex>
