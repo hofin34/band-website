@@ -1,5 +1,5 @@
 import { Card, CardBody, Heading, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import guitarPlayer from '../assets/guitar_player.jpeg'
 
 function MemberTile() {
