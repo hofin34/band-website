@@ -6,7 +6,7 @@ import NavigationBar from './NavigationBar'
 function Layout() {
     return (
         <>
-            <Box minHeight='100vh' minWidth='100vh'>
+            <Box minHeight='100vh' >
 
                 <Flex direction="column" height='100vh'>
                     <NavigationBar />
