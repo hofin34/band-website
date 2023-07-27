@@ -35,10 +35,10 @@ function HomePage() {
 
             <Heading mb='30px' mt='30px' size='lg'>Výběr fotek z koncertů</Heading>
 
-            <ImageGallery items={images} />;
+            <ImageGallery items={images} />
 
         </>
-    )
+    );
 }
 
 export default HomePage

@@ -3,6 +3,7 @@ import useProducts from '../api/useProducts';
 import useShopStore from '../state/shopState';
 import AddProductButton from './AddProductButton';
 import { urlFor } from '../../../services/sanity-client';
+import { Link } from 'react-router-dom';
 
 
 function getShortText(text: string, length: number) {
@@ -27,20 +28,23 @@ function EshopPage() {
             {isLoading && <Spinner />}
             <SimpleGrid mt='15px' spacing="10px" columns={{ base: 1, sm: 1, md: 3, lg: 4 }}>
                 {data?.result.map((product) =>
-                    <Card maxW='md' key={product._id}>
-                        <CardBody>
-                            <Image src={urlFor(product.images[0].asset._ref).height(300).width(300).url()} alt='Product image' borderRadius='lg' />
-                            <Stack mt='6' spacing='3'>
-                                <Heading size='md'>{product.name}</Heading>
-                                <Text>{getShortText(product.detail, 30)}</Text>
-                                <Flex justifyContent='space-between' alignItems='center'>
-                                    <Text color='blue.600' fontSize='2xl'>{product.price} Kč</Text>
-                                    <AddProductButton onClickAction={() => addProduct(product)} />
-                                </Flex>
-                            </Stack>
-                        </CardBody>
+                    <Link to={`produkt/${product._id}`} key={product._id}>
+                        <Card maxW='md'>
+                            <CardBody>
+                                <Image src={urlFor(product.images[0].asset._ref).height(300).width(300).url()} alt='Product image' borderRadius='lg' />
+                                <Stack mt='6' spacing='3'>
+                                    <Heading size='md'>{product.name}</Heading>
+                                    <Text>{getShortText(product.detail, 30)}</Text>
+                                    <Flex justifyContent='space-between' alignItems='center'>
+                                        <Text color='blue.600' fontSize='2xl'>{product.price} Kč</Text>
+                                        <AddProductButton onClickAction={() => addProduct(product)} />
+                                    </Flex>
+                                </Stack>
+                            </CardBody>
 
-                    </Card >)
+                        </Card >
+                    </Link>
+                )
                 }
             </SimpleGrid>
         </>
