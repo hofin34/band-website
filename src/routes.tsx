@@ -9,6 +9,8 @@ import Recapitulation from "./features/order-finish/components/Recapitulation";
 import ShippingInfo from "./features/order-finish/components/ShippingInfo";
 import Payment from "./features/order-finish/components/Payment";
 import FinishCongratulation from "./features/order-finish/components/FinishCongratulation";
+import ErrorPage from "./components/ErrorPage";
+import ProductDetail from "./features/eshop/components/ProductDetail";
 
 
 
@@ -17,7 +19,12 @@ const router = createBrowserRouter([{
         { path: "", element: <HomePage /> },
         { path: "koncerty", element: <ConcertPage /> },
         { path: "o-nas", element: <AboutPage /> },
-        { path: "eshop", element: <EshopPage /> },
+        {
+            path: "eshop", children: [
+                { index: true, element: <EshopPage /> },
+                { path: "produkt/:id", element: < ProductDetail /> }
+            ]
+        },
         { path: "gratulace", element: <FinishCongratulation /> },
         {
             path: "rekapitulace", element: <OrderFinishLayout />, children: [
@@ -26,7 +33,8 @@ const router = createBrowserRouter([{
                 { path: "platba", element: <Payment /> },
 
             ]
-        }
+        },
+        { path: "*", element: <ErrorPage /> }
     ]
 }
 ]);
